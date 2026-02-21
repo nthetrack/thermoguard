@@ -42,29 +42,29 @@ function TempChart() {
   return (
     <div className="rounded-xl overflow-hidden border border-white/10 shadow-xl shadow-black/30">
       {/* macOS-style window chrome */}
-      <div className="flex items-center gap-1.5 px-3 py-2 bg-black/40 border-b border-white/[0.06]">
+      <div className="flex items-center gap-1.5 px-3 py-2 md:px-4 md:py-2.5 bg-black/40 border-b border-white/[0.06]">
         <div className="w-2 h-2 rounded-full bg-[#ff5f56]" />
         <div className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
         <div className="w-2 h-2 rounded-full bg-[#27c93f]" />
-        <span className="ml-2 text-[8.5px] text-white/25 font-mono tracking-wider">
+        <span className="ml-2 text-[8.5px] md:text-[11px] text-white/25 font-mono tracking-wider">
           CoolResponse · Device Monitor
         </span>
       </div>
       {/* Chart area */}
-      <div className="bg-brand-950/80 px-3.5 pt-3 pb-2.5">
-        <div className="flex items-start justify-between mb-3">
+      <div className="bg-brand-950/80 px-3.5 md:px-5 pt-3 md:pt-4 pb-2.5 md:pb-3">
+        <div className="flex items-start justify-between mb-3 md:mb-4">
           <div>
-            <p className="text-[11px] font-semibold text-white">Ward A — Temperature</p>
-            <p className="text-[9px] text-brand-400 mt-0.5">Sunrise Nursing Home · Last 6 hours</p>
+            <p className="text-[11px] md:text-[13px] lg:text-sm font-semibold text-white">Ward A — Temperature</p>
+            <p className="text-[9px] md:text-[10px] text-brand-400 mt-0.5">Sunrise Nursing Home · Last 6 hours</p>
           </div>
           <div className="flex items-center gap-1.5 bg-red-500/15 border border-red-500/30 rounded-full px-2 py-0.5">
             <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse flex-shrink-0" />
-            <span className="text-[8px] font-bold text-red-300 whitespace-nowrap">31.4°C — CRITICAL</span>
+            <span className="text-[8px] md:text-[9px] font-bold text-red-300 whitespace-nowrap">31.4°C — CRITICAL</span>
           </div>
         </div>
         <svg
           viewBox="0 0 280 78"
-          className="w-full h-[65px] sm:h-[78px]"
+          className="w-full h-[65px] sm:h-[78px] md:h-[100px]"
           aria-hidden="true"
         >
           <defs>
@@ -131,7 +131,11 @@ function TempChart() {
 function PhoneMockup() {
   return (
     <div className="flex flex-col items-center">
-      <div style={{ width: '192px' }}>
+      {/*
+        CSS zoom scales the element AND its layout space (unlike transform: scale).
+        This gives us a bigger phone on desktop without duplicating internal markup.
+      */}
+      <div style={{ width: '192px' }} className="md:[zoom:1.25] lg:[zoom:1.4]">
         {/* Outer phone shell */}
         <div className="bg-[#1a1a1a] rounded-[2.75rem] p-[3px] shadow-2xl shadow-black/70 border border-white/[0.07]">
           {/* Screen */}
@@ -219,7 +223,7 @@ function PhoneMockup() {
           </div>
         </div>
       </div>
-      <p className="text-[9px] text-brand-400 mt-2.5">SMS alert — no app install required</p>
+      <p className="text-[9px] md:text-xs text-brand-400 mt-3">SMS alert — no app install required</p>
     </div>
   )
 }
@@ -227,46 +231,48 @@ function PhoneMockup() {
 // ── Dispatch outcome cards ─────────────────────────────────────────────────────
 function ResponseCards() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-4">
       {/* Technician */}
-      <div className="bg-white/[0.08] border border-white/[0.12] rounded-xl p-3 hover:bg-white/[0.12] transition-colors">
-        <div className="w-7 h-7 rounded-lg bg-brand-600/50 flex items-center justify-center mb-2.5">
-          <Wrench size={13} className="text-brand-200" />
+      <div className="bg-white/[0.08] border border-white/[0.12] rounded-xl p-3 md:p-5 hover:bg-white/[0.12] transition-colors">
+        <div className="w-7 h-7 md:w-9 md:h-9 rounded-lg bg-brand-600/50 flex items-center justify-center mb-2.5 md:mb-3">
+          <Wrench size={13} className="text-brand-200 md:hidden" />
+          <Wrench size={17} className="text-brand-200 hidden md:block" />
         </div>
-        <p className="text-[10.5px] font-semibold text-white leading-snug mb-0.5">
+        <p className="text-[10.5px] md:text-sm lg:text-[15px] font-semibold text-white leading-snug mb-0.5">
           Technician dispatch
         </p>
-        <p className="text-[8.5px] text-brand-400 mb-2">ProCool HVAC Services</p>
+        <p className="text-[8.5px] md:text-xs text-brand-400 mb-2 md:mb-3">ProCool HVAC Services</p>
         <div className="space-y-1">
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
-            <p className="text-[8px] text-emerald-400 font-medium">Available now</p>
+            <p className="text-[8px] md:text-[11px] text-emerald-400 font-medium">Available now</p>
           </div>
-          <p className="text-[8px] text-brand-400">ETA ~45 minutes</p>
+          <p className="text-[8px] md:text-[11px] text-brand-400">ETA ~45 minutes</p>
         </div>
-        <div className="mt-2 pt-2 border-t border-white/10">
-          <p className="text-[7.5px] text-white/40">On-site diagnosis & repair</p>
+        <div className="mt-2 md:mt-3 pt-2 md:pt-3 border-t border-white/10">
+          <p className="text-[7.5px] md:text-[11px] text-white/40">On-site diagnosis & repair</p>
         </div>
       </div>
 
       {/* Temporary AC */}
-      <div className="bg-white/[0.08] border border-white/[0.12] rounded-xl p-3 hover:bg-white/[0.12] transition-colors">
-        <div className="w-7 h-7 rounded-lg bg-emerald-600/40 flex items-center justify-center mb-2.5">
-          <Wind size={13} className="text-emerald-300" />
+      <div className="bg-white/[0.08] border border-white/[0.12] rounded-xl p-3 md:p-5 hover:bg-white/[0.12] transition-colors">
+        <div className="w-7 h-7 md:w-9 md:h-9 rounded-lg bg-emerald-600/40 flex items-center justify-center mb-2.5 md:mb-3">
+          <Wind size={13} className="text-emerald-300 md:hidden" />
+          <Wind size={17} className="text-emerald-300 hidden md:block" />
         </div>
-        <p className="text-[10.5px] font-semibold text-white leading-snug mb-0.5">
+        <p className="text-[10.5px] md:text-sm lg:text-[15px] font-semibold text-white leading-snug mb-0.5">
           Temporary AC units
         </p>
-        <p className="text-[8.5px] text-brand-400 mb-2">CoolAir Rentals</p>
+        <p className="text-[8.5px] md:text-xs text-brand-400 mb-2 md:mb-3">CoolAir Rentals</p>
         <div className="space-y-1">
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
-            <p className="text-[8px] text-emerald-400 font-medium">2 units available</p>
+            <p className="text-[8px] md:text-[11px] text-emerald-400 font-medium">2 units available</p>
           </div>
-          <p className="text-[8px] text-brand-400">Delivery ~2 hours</p>
+          <p className="text-[8px] md:text-[11px] text-brand-400">Delivery ~2 hours</p>
         </div>
-        <div className="mt-2 pt-2 border-t border-white/10">
-          <p className="text-[7.5px] text-white/40">Immediate cooling cover</p>
+        <div className="mt-2 md:mt-3 pt-2 md:pt-3 border-t border-white/10">
+          <p className="text-[7.5px] md:text-[11px] text-white/40">Immediate cooling cover</p>
         </div>
       </div>
     </div>
@@ -283,29 +289,33 @@ function MarketingPanel() {
         <div className="absolute bottom-20 -left-20 w-80 h-80 rounded-full bg-brand-500 opacity-[0.06] blur-3xl" />
       </div>
 
-      <div className="relative">
+      {/*
+        max-w constrains line length on wide monitors so content stays readable.
+        mx-auto centers it within the (sometimes very wide) marketing column.
+      */}
+      <div className="relative max-w-[680px] lg:max-w-[740px] md:mx-auto">
 
         {/* Wordmark — hidden on mobile (nav carries it), shown once side-by-side layout kicks in */}
         <div className="hidden md:flex items-center gap-2.5 mb-8 lg:mb-10">
-          <div className="w-9 h-9 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center">
-            <Wind size={18} className="text-white" />
+          <div className="w-9 h-9 lg:w-11 lg:h-11 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center">
+            <Wind className="text-white w-[18px] h-[18px] lg:w-[22px] lg:h-[22px]" />
           </div>
-          <span className="text-white text-xl font-bold tracking-tight">CoolResponse</span>
+          <span className="text-white text-xl lg:text-2xl font-bold tracking-tight">CoolResponse</span>
         </div>
 
         {/* Live status pill */}
         <div className="inline-flex items-center gap-1.5 bg-red-500/10 border border-red-500/20 rounded-full px-3 py-1 mb-4 md:mb-5">
           <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse flex-shrink-0" />
-          <span className="text-[10px] font-semibold text-red-300 tracking-widest uppercase">
+          <span className="text-[10px] md:text-xs font-semibold text-red-300 tracking-widest uppercase">
             Live monitoring active
           </span>
         </div>
 
         {/* Hero */}
-        <h1 className="text-2xl sm:text-3xl xl:text-[2.4rem] font-bold text-white leading-tight mb-3">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-[2.6rem] font-bold text-white leading-tight mb-3 md:mb-5">
           When cold rooms fail,<br />response time is everything.
         </h1>
-        <p className="text-brand-200 text-sm sm:text-[15px] leading-relaxed max-w-lg mb-6 md:mb-8">
+        <p className="text-brand-200 text-sm sm:text-[15px] md:text-base lg:text-[17px] leading-relaxed max-w-lg md:max-w-none mb-6 md:mb-8">
           CoolResponse watches temperatures across all your sites around the clock.
           The moment a reading exceeds your limit, the right people get an SMS —
           with a one-tap option to dispatch a technician or order temporary cooling.
@@ -313,40 +323,40 @@ function MarketingPanel() {
         </p>
 
         {/* Stats strip */}
-        <div className="grid grid-cols-3 gap-3 md:gap-4 mb-6 pb-6 md:mb-8 md:pb-8 border-b border-white/10">
+        <div className="grid grid-cols-3 gap-3 md:gap-6 mb-6 pb-6 md:mb-10 md:pb-10 border-b border-white/10">
           {[
             { value: '30 sec',  label: 'Sensor polling' },
             { value: '< 2 min', label: 'Alert to SMS'   },
             { value: '24 / 7',  label: 'Always-on'      },
           ].map(s => (
             <div key={s.label}>
-              <p className="text-lg sm:text-[1.35rem] font-bold text-white leading-none">{s.value}</p>
-              <p className="text-[9px] sm:text-[10px] text-brand-400 mt-1">{s.label}</p>
+              <p className="text-lg sm:text-[1.35rem] md:text-2xl lg:text-3xl font-bold text-white leading-none">{s.value}</p>
+              <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-[13px] text-brand-400 mt-1 md:mt-1.5">{s.label}</p>
             </div>
           ))}
         </div>
 
         {/* Body — always fully visible; on mobile this section scrolls below the login card */}
-        <div className="space-y-10 sm:space-y-12">
+        <div className="space-y-10 sm:space-y-12 md:space-y-14 lg:space-y-16">
 
           {/* ── Workflow ── */}
           <section id="how-it-works">
-            <p className="text-[11px] uppercase tracking-widest font-semibold text-brand-400 mb-1">
+            <p className="text-[11px] md:text-xs uppercase tracking-widest font-semibold text-brand-400 mb-1">
               How it works
             </p>
-            <h2 className="text-xl font-bold text-white mb-7">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-7 md:mb-8">
               From alarm to action — in minutes.
             </h2>
 
             {/* Step 1 */}
-            <div className="mb-8">
-              <div className="flex items-center gap-2.5 mb-2">
-                <div className="w-5 h-5 rounded-full bg-brand-600 flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0">
+            <div className="mb-8 md:mb-10">
+              <div className="flex items-center gap-2.5 md:gap-3 mb-2 md:mb-3">
+                <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-brand-600 flex items-center justify-center text-[10px] md:text-xs font-bold text-white flex-shrink-0">
                   1
                 </div>
-                <p className="text-[13px] font-semibold text-white">Continuous monitoring</p>
+                <p className="text-[13px] md:text-base lg:text-[17px] font-semibold text-white">Continuous monitoring</p>
               </div>
-              <p className="text-xs text-brand-300 leading-relaxed mb-4 pl-[29px]">
+              <p className="text-xs md:text-sm lg:text-[15px] text-brand-300 leading-relaxed mb-4 md:mb-5 pl-[29px] md:pl-[40px]">
                 Sensors report in every 30 seconds. You set the temperature limits per
                 device — CoolResponse watches around the clock, across every room and
                 every site.
@@ -355,19 +365,19 @@ function MarketingPanel() {
             </div>
 
             {/* Step connector */}
-            <div className="flex pl-[9px] mb-8">
+            <div className="flex pl-[9px] md:pl-[12px] mb-8 md:mb-10">
               <div className="w-[2px] h-6 bg-gradient-to-b from-brand-600/70 to-transparent rounded-full" />
             </div>
 
             {/* Step 2 */}
-            <div className="mb-8">
-              <div className="flex items-center gap-2.5 mb-2">
-                <div className="w-5 h-5 rounded-full bg-brand-600 flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0">
+            <div className="mb-8 md:mb-10">
+              <div className="flex items-center gap-2.5 md:gap-3 mb-2 md:mb-3">
+                <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-brand-600 flex items-center justify-center text-[10px] md:text-xs font-bold text-white flex-shrink-0">
                   2
                 </div>
-                <p className="text-[13px] font-semibold text-white">Instant SMS alert</p>
+                <p className="text-[13px] md:text-base lg:text-[17px] font-semibold text-white">Instant SMS alert</p>
               </div>
-              <p className="text-xs text-brand-300 leading-relaxed mb-5 pl-[29px]">
+              <p className="text-xs md:text-sm lg:text-[15px] text-brand-300 leading-relaxed mb-5 md:mb-6 pl-[29px] md:pl-[40px]">
                 The moment a threshold is crossed, the right people get a plain-text SMS
                 with full context and a clear response menu — no app to download, no
                 account to log in to.
@@ -376,19 +386,19 @@ function MarketingPanel() {
             </div>
 
             {/* Step connector */}
-            <div className="flex pl-[9px] mb-8">
+            <div className="flex pl-[9px] md:pl-[12px] mb-8 md:mb-10">
               <div className="w-[2px] h-6 bg-gradient-to-b from-brand-600/70 to-transparent rounded-full" />
             </div>
 
             {/* Step 3 */}
             <div>
-              <div className="flex items-center gap-2.5 mb-2">
-                <div className="w-5 h-5 rounded-full bg-brand-600 flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0">
+              <div className="flex items-center gap-2.5 md:gap-3 mb-2 md:mb-3">
+                <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-brand-600 flex items-center justify-center text-[10px] md:text-xs font-bold text-white flex-shrink-0">
                   3
                 </div>
-                <p className="text-[13px] font-semibold text-white">Dispatch & resolve</p>
+                <p className="text-[13px] md:text-base lg:text-[17px] font-semibold text-white">Dispatch & resolve</p>
               </div>
-              <p className="text-xs text-brand-300 leading-relaxed mb-4 pl-[29px]">
+              <p className="text-xs md:text-sm lg:text-[15px] text-brand-300 leading-relaxed mb-4 md:mb-5 pl-[29px] md:pl-[40px]">
                 Replying triggers an automated workflow. A certified technician heads to
                 site, or portable cooling units are dispatched — your choice, instantly
                 actioned and tracked end-to-end.
@@ -399,17 +409,17 @@ function MarketingPanel() {
 
           {/* ── Built for ── */}
           <section>
-            <h2 className="text-[11px] uppercase tracking-widest font-semibold text-brand-400 mb-3">
+            <h2 className="text-[11px] md:text-xs uppercase tracking-widest font-semibold text-brand-400 mb-3 md:mb-4">
               Built for
             </h2>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2.5 md:space-y-3">
               {[
                 'Aged care & nursing homes — resident safety',
                 'Convenience & grocery retail — prevent spoilage, protect stock',
                 'Childcare, healthcare & critical facilities',
               ].map(item => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-brand-100">
-                  <CheckCircle size={14} className="text-brand-400 mt-0.5 flex-shrink-0" />
+                <li key={item} className="flex items-start gap-2.5 text-sm md:text-base lg:text-[17px] text-brand-100">
+                  <CheckCircle size={15} className="text-brand-400 mt-0.5 md:mt-1 flex-shrink-0" />
                   {item}
                 </li>
               ))}
@@ -418,14 +428,14 @@ function MarketingPanel() {
 
           {/* ── Trust signals ── */}
           <section id="security" className="pt-6 border-t border-white/10">
-            <div className="flex flex-wrap gap-x-6 gap-y-2.5">
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
               {[
                 { icon: LayoutDashboard, label: 'Designed for multi-site operations' },
                 { icon: Users,           label: 'Role-based access: Admin, Manager, Vendor' },
                 { icon: Shield,          label: 'Secure by design (demo environment)' },
               ].map(t => (
-                <div key={t.label} className="flex items-center gap-1.5 text-xs text-brand-300">
-                  <t.icon size={12} className="text-brand-400 flex-shrink-0" />
+                <div key={t.label} className="flex items-center gap-1.5 text-xs md:text-sm text-brand-300">
+                  <t.icon size={13} className="text-brand-400 flex-shrink-0" />
                   {t.label}
                 </div>
               ))}
@@ -433,7 +443,7 @@ function MarketingPanel() {
           </section>
 
         </div>{/* end space-y body */}
-      </div>{/* end inner relative */}
+      </div>{/* end inner max-w */}
     </div>
   )
 }
@@ -509,16 +519,16 @@ export default function LoginPage() {
 
         {/* Left: marketing — visually below login on mobile, left column on md+ */}
         <div className="md:flex-1 overflow-hidden bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800
-                        px-5 py-10 sm:px-8 md:px-10 lg:px-14 lg:py-16">
+                        px-5 py-10 sm:px-8 md:px-10 lg:px-16 xl:px-20 lg:py-16">
           <MarketingPanel />
         </div>
 
         {/* Right: login — visually first on mobile (col-reverse), right column + sticky on md+ */}
         <div
           id="login"
-          className="md:w-[370px] lg:w-[460px] xl:w-[500px] bg-gray-50
+          className="md:w-[380px] lg:w-[460px] xl:w-[520px] bg-gray-50
                      flex items-center justify-center
-                     px-5 py-10 sm:px-8
+                     px-5 py-10 sm:px-8 lg:px-10
                      md:sticky md:top-14 md:h-[calc(100vh-3.5rem)]"
         >
           <div className="w-full max-w-sm">
