@@ -37,34 +37,34 @@ function CopyButton({ text }) {
   )
 }
 
-// ── Temperature chart (fake dashboard screenshot) ─────────────────────────────
+// ── Temperature chart ──────────────────────────────────────────────────────────
 function TempChart() {
   return (
     <div className="rounded-xl overflow-hidden border border-white/10 shadow-xl shadow-black/30">
-      {/* macOS-style window chrome */}
-      <div className="flex items-center gap-1.5 px-3 py-2 md:px-4 md:py-2.5 bg-black/40 border-b border-white/[0.06]">
+      {/* macOS window chrome */}
+      <div className="flex items-center gap-1.5 px-3 py-2 md:px-5 md:py-3 bg-black/40 border-b border-white/[0.06]">
         <div className="w-2 h-2 rounded-full bg-[#ff5f56]" />
         <div className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
         <div className="w-2 h-2 rounded-full bg-[#27c93f]" />
-        <span className="ml-2 text-[8.5px] md:text-[11px] text-white/25 font-mono tracking-wider">
+        <span className="ml-2 text-[8.5px] md:text-sm text-white/25 font-mono tracking-wider">
           CoolResponse · Device Monitor
         </span>
       </div>
       {/* Chart area */}
-      <div className="bg-brand-950/80 px-3.5 md:px-5 pt-3 md:pt-4 pb-2.5 md:pb-3">
-        <div className="flex items-start justify-between mb-3 md:mb-4">
+      <div className="bg-brand-950/80 px-3.5 md:px-6 pt-3 md:pt-5 pb-2.5 md:pb-4">
+        <div className="flex items-start justify-between mb-3 md:mb-5">
           <div>
-            <p className="text-[11px] md:text-[13px] lg:text-sm font-semibold text-white">Ward A — Temperature</p>
-            <p className="text-[9px] md:text-[10px] text-brand-400 mt-0.5">Sunrise Nursing Home · Last 6 hours</p>
+            <p className="text-[11px] md:text-base font-semibold text-white">Ward A — Temperature</p>
+            <p className="text-[9px] md:text-sm text-brand-400 mt-0.5">Sunrise Nursing Home · Last 6 hours</p>
           </div>
-          <div className="flex items-center gap-1.5 bg-red-500/15 border border-red-500/30 rounded-full px-2 py-0.5">
+          <div className="flex items-center gap-1.5 bg-red-500/15 border border-red-500/30 rounded-full px-2 md:px-3 py-0.5">
             <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse flex-shrink-0" />
-            <span className="text-[8px] md:text-[9px] font-bold text-red-300 whitespace-nowrap">31.4°C — CRITICAL</span>
+            <span className="text-[8px] md:text-xs font-bold text-red-300 whitespace-nowrap">31.4°C — CRITICAL</span>
           </div>
         </div>
         <svg
           viewBox="0 0 280 78"
-          className="w-full h-[65px] sm:h-[78px] md:h-[100px]"
+          className="w-full h-[65px] sm:h-[78px] md:h-[110px]"
           aria-hidden="true"
         >
           <defs>
@@ -77,46 +77,18 @@ function TempChart() {
               <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
             </linearGradient>
           </defs>
-
-          {/* Faint grid */}
           {[14, 28, 42, 56].map(y => (
-            <line key={y} x1="0" y1={y} x2="280" y2={y}
-              stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+            <line key={y} x1="0" y1={y} x2="280" y2={y} stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
           ))}
-
-          {/* Threshold line */}
-          <line x1="0" y1="37" x2="280" y2="37"
-            stroke="#ef4444" strokeWidth="1" strokeDasharray="4,3" opacity="0.55" />
+          <line x1="0" y1="37" x2="280" y2="37" stroke="#ef4444" strokeWidth="1" strokeDasharray="4,3" opacity="0.55" />
           <rect x="0" y="29" width="24" height="9" rx="2" fill="rgba(239,68,68,0.15)" />
           <text x="2" y="36.5" fill="#ef4444" fontSize="6" opacity="0.85" fontFamily="monospace">26°C</text>
-
-          {/* Fill under normal segment */}
-          <path
-            d="M 0,60 C 22,59 45,62 70,60 C 95,58 118,61 143,59 C 162,58 172,57 182,56 L 182,68 L 0,68 Z"
-            fill="url(#crNormalFill)"
-          />
-          {/* Fill under spike segment (above threshold) */}
-          <path
-            d="M 182,56 C 198,49 214,38 232,24 C 248,12 262,7 272,6 L 272,37 L 182,37 Z"
-            fill="url(#crSpikeFill)"
-          />
-
-          {/* Normal temperature line */}
-          <path
-            d="M 0,60 C 22,59 45,62 70,60 C 95,58 118,61 143,59 C 162,58 172,57 182,56"
-            fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          />
-          {/* Spike line */}
-          <path
-            d="M 182,56 C 198,49 214,38 232,24 C 248,12 262,7 272,6"
-            fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          />
-
-          {/* Current-reading dot with halo */}
+          <path d="M 0,60 C 22,59 45,62 70,60 C 95,58 118,61 143,59 C 162,58 172,57 182,56 L 182,68 L 0,68 Z" fill="url(#crNormalFill)" />
+          <path d="M 182,56 C 198,49 214,38 232,24 C 248,12 262,7 272,6 L 272,37 L 182,37 Z" fill="url(#crSpikeFill)" />
+          <path d="M 0,60 C 22,59 45,62 70,60 C 95,58 118,61 143,59 C 162,58 172,57 182,56" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M 182,56 C 198,49 214,38 232,24 C 248,12 262,7 272,6" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
           <circle cx="272" cy="6" r="7" fill="#ef4444" opacity="0.15" />
           <circle cx="272" cy="6" r="3" fill="#ef4444" />
-
-          {/* Time axis labels */}
           <text x="1"   y="76" fill="rgba(255,255,255,0.22)" fontSize="6">−6 h</text>
           <text x="88"  y="76" fill="rgba(255,255,255,0.22)" fontSize="6">−4 h</text>
           <text x="175" y="76" fill="rgba(255,255,255,0.22)" fontSize="6">−2 h</text>
@@ -127,37 +99,25 @@ function TempChart() {
   )
 }
 
-// ── Phone mockup with SMS alert ───────────────────────────────────────────────
+// ── Phone mockup ───────────────────────────────────────────────────────────────
 function PhoneMockup() {
   return (
     <div className="flex flex-col items-center">
-      {/*
-        CSS zoom scales the element AND its layout space (unlike transform: scale).
-        This gives us a bigger phone on desktop without duplicating internal markup.
-      */}
-      <div style={{ width: '192px' }} className="md:[zoom:1.25] lg:[zoom:1.4]">
-        {/* Outer phone shell */}
+      <div style={{ width: '192px' }} className="md:[zoom:1.5] lg:[zoom:1.7]">
         <div className="bg-[#1a1a1a] rounded-[2.75rem] p-[3px] shadow-2xl shadow-black/70 border border-white/[0.07]">
-          {/* Screen */}
           <div className="bg-black rounded-[2.5rem] overflow-hidden">
-
-            {/* Dynamic island */}
             <div className="flex justify-center pt-3 pb-0.5 bg-black">
               <div className="w-[74px] h-[18px] bg-[#111] rounded-[10px]" />
             </div>
-
-            {/* Status bar */}
             <div className="flex items-center justify-between px-4 pb-2 bg-black">
               <span className="text-white text-[8px] font-semibold">9:41</span>
               <div className="flex items-center gap-1 opacity-80">
-                {/* Signal bars */}
                 <svg width="14" height="9" viewBox="0 0 14 9" fill="white">
                   <rect x="0" y="4" width="2.5" height="5" rx="0.5" />
                   <rect x="3.5" y="2.5" width="2.5" height="6.5" rx="0.5" />
                   <rect x="7" y="1" width="2.5" height="8" rx="0.5" />
                   <rect x="10.5" y="0" width="2.5" height="9" rx="0.5" opacity="0.35" />
                 </svg>
-                {/* Battery */}
                 <svg width="20" height="9" viewBox="0 0 20 9" fill="white">
                   <rect x="0" y="1" width="16" height="7" rx="1.5" fill="none" stroke="white" strokeWidth="1" />
                   <rect x="1.5" y="2.5" width="10" height="4" rx="0.5" />
@@ -165,8 +125,6 @@ function PhoneMockup() {
                 </svg>
               </div>
             </div>
-
-            {/* Messages app header */}
             <div className="bg-[#1c1c1e] px-3 py-2 flex items-center gap-2 border-b border-[#2c2c2e]">
               <div className="w-7 h-7 rounded-full bg-brand-600 flex items-center justify-center flex-shrink-0">
                 <span className="text-[8px] text-white font-bold">CR</span>
@@ -176,10 +134,7 @@ function PhoneMockup() {
                 <p className="text-[#8e8e93] text-[7px] mt-0.5">Temperature Alerts</p>
               </div>
             </div>
-
-            {/* Message thread */}
             <div className="bg-black px-2.5 pt-3 pb-2 space-y-2">
-              {/* Alert bubble */}
               <div className="bg-[#ff3b30] rounded-[14px] rounded-tl-[3px] px-2.5 py-2" style={{ maxWidth: '90%' }}>
                 <p className="text-white text-[7.5px] font-bold tracking-wide mb-1">⚠ THRESHOLD EXCEEDED</p>
                 <p className="text-red-50 text-[7.5px] leading-[1.6]">
@@ -188,15 +143,10 @@ function PhoneMockup() {
                   Sunrise Nursing Home
                 </p>
               </div>
-              {/* Follow-up prompt */}
               <div className="bg-[#1c1c1e] rounded-[14px] rounded-tl-[3px] px-2.5 py-2" style={{ maxWidth: '90%' }}>
-                <p className="text-[#aeaeb2] text-[7.5px] leading-[1.5]">
-                  How do you want to respond?
-                </p>
+                <p className="text-[#aeaeb2] text-[7.5px] leading-[1.5]">How do you want to respond?</p>
               </div>
             </div>
-
-            {/* Response option buttons */}
             <div className="bg-black px-2.5 pb-3 space-y-1.5">
               <div className="bg-brand-600 rounded-[10px] py-[8px] text-center">
                 <p className="text-white text-[7.5px] font-semibold">1 · Dispatch a technician</p>
@@ -208,22 +158,18 @@ function PhoneMockup() {
                 <p className="text-[#8e8e93] text-[7.5px]">3 · Acknowledge only</p>
               </div>
             </div>
-
-            {/* Input bar */}
             <div className="bg-[#1c1c1e] px-2.5 py-2 flex items-center gap-1.5 border-t border-[#2c2c2e]">
               <div className="flex-1 bg-[#2c2c2e] rounded-full px-2.5 py-1">
                 <p className="text-[#636366] text-[7px]">Reply…</p>
               </div>
             </div>
-
-            {/* Home indicator */}
             <div className="flex justify-center py-1.5 bg-[#1c1c1e]">
               <div className="w-[68px] h-[3px] bg-white/20 rounded-full" />
             </div>
           </div>
         </div>
       </div>
-      <p className="text-[9px] md:text-xs text-brand-400 mt-3">SMS alert — no app install required</p>
+      <p className="text-[9px] md:text-sm text-brand-400 mt-3">SMS alert — no app install required</p>
     </div>
   )
 }
@@ -231,48 +177,44 @@ function PhoneMockup() {
 // ── Dispatch outcome cards ─────────────────────────────────────────────────────
 function ResponseCards() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-4">
-      {/* Technician */}
-      <div className="bg-white/[0.08] border border-white/[0.12] rounded-xl p-3 md:p-5 hover:bg-white/[0.12] transition-colors">
-        <div className="w-7 h-7 md:w-9 md:h-9 rounded-lg bg-brand-600/50 flex items-center justify-center mb-2.5 md:mb-3">
-          <Wrench size={13} className="text-brand-200 md:hidden" />
-          <Wrench size={17} className="text-brand-200 hidden md:block" />
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-5">
+      <div className="bg-white/[0.08] border border-white/[0.12] rounded-xl p-4 md:p-6 hover:bg-white/[0.12] transition-colors">
+        <div className="w-8 h-8 md:w-11 md:h-11 rounded-lg bg-brand-600/50 flex items-center justify-center mb-3">
+          <Wrench className="text-brand-200 w-[14px] h-[14px] md:w-5 md:h-5" />
         </div>
-        <p className="text-[10.5px] md:text-sm lg:text-[15px] font-semibold text-white leading-snug mb-0.5">
+        <p className="text-[10.5px] md:text-base lg:text-lg font-semibold text-white leading-snug mb-1">
           Technician dispatch
         </p>
-        <p className="text-[8.5px] md:text-xs text-brand-400 mb-2 md:mb-3">ProCool HVAC Services</p>
-        <div className="space-y-1">
+        <p className="text-[8.5px] md:text-sm text-brand-400 mb-3">ProCool HVAC Services</p>
+        <div className="space-y-1.5">
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
-            <p className="text-[8px] md:text-[11px] text-emerald-400 font-medium">Available now</p>
+            <p className="text-[8px] md:text-sm text-emerald-400 font-medium">Available now</p>
           </div>
-          <p className="text-[8px] md:text-[11px] text-brand-400">ETA ~45 minutes</p>
+          <p className="text-[8px] md:text-sm text-brand-400">ETA ~45 minutes</p>
         </div>
-        <div className="mt-2 md:mt-3 pt-2 md:pt-3 border-t border-white/10">
-          <p className="text-[7.5px] md:text-[11px] text-white/40">On-site diagnosis & repair</p>
+        <div className="mt-3 pt-3 border-t border-white/10">
+          <p className="text-[7.5px] md:text-sm text-white/40">On-site diagnosis & repair</p>
         </div>
       </div>
 
-      {/* Temporary AC */}
-      <div className="bg-white/[0.08] border border-white/[0.12] rounded-xl p-3 md:p-5 hover:bg-white/[0.12] transition-colors">
-        <div className="w-7 h-7 md:w-9 md:h-9 rounded-lg bg-emerald-600/40 flex items-center justify-center mb-2.5 md:mb-3">
-          <Wind size={13} className="text-emerald-300 md:hidden" />
-          <Wind size={17} className="text-emerald-300 hidden md:block" />
+      <div className="bg-white/[0.08] border border-white/[0.12] rounded-xl p-4 md:p-6 hover:bg-white/[0.12] transition-colors">
+        <div className="w-8 h-8 md:w-11 md:h-11 rounded-lg bg-emerald-600/40 flex items-center justify-center mb-3">
+          <Wind className="text-emerald-300 w-[14px] h-[14px] md:w-5 md:h-5" />
         </div>
-        <p className="text-[10.5px] md:text-sm lg:text-[15px] font-semibold text-white leading-snug mb-0.5">
+        <p className="text-[10.5px] md:text-base lg:text-lg font-semibold text-white leading-snug mb-1">
           Temporary AC units
         </p>
-        <p className="text-[8.5px] md:text-xs text-brand-400 mb-2 md:mb-3">CoolAir Rentals</p>
-        <div className="space-y-1">
+        <p className="text-[8.5px] md:text-sm text-brand-400 mb-3">CoolAir Rentals</p>
+        <div className="space-y-1.5">
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
-            <p className="text-[8px] md:text-[11px] text-emerald-400 font-medium">2 units available</p>
+            <p className="text-[8px] md:text-sm text-emerald-400 font-medium">2 units available</p>
           </div>
-          <p className="text-[8px] md:text-[11px] text-brand-400">Delivery ~2 hours</p>
+          <p className="text-[8px] md:text-sm text-brand-400">Delivery ~2 hours</p>
         </div>
-        <div className="mt-2 md:mt-3 pt-2 md:pt-3 border-t border-white/10">
-          <p className="text-[7.5px] md:text-[11px] text-white/40">Immediate cooling cover</p>
+        <div className="mt-3 pt-3 border-t border-white/10">
+          <p className="text-[7.5px] md:text-sm text-white/40">Immediate cooling cover</p>
         </div>
       </div>
     </div>
@@ -289,33 +231,30 @@ function MarketingPanel() {
         <div className="absolute bottom-20 -left-20 w-80 h-80 rounded-full bg-brand-500 opacity-[0.06] blur-3xl" />
       </div>
 
-      {/*
-        max-w constrains line length on wide monitors so content stays readable.
-        mx-auto centers it within the (sometimes very wide) marketing column.
-      */}
-      <div className="relative max-w-[680px] lg:max-w-[740px] md:mx-auto">
+      {/* Content — capped width so lines don't get too long on ultra-wide screens */}
+      <div className="relative max-w-[780px] lg:max-w-[860px] md:mx-auto">
 
-        {/* Wordmark — hidden on mobile (nav carries it), shown once side-by-side layout kicks in */}
-        <div className="hidden md:flex items-center gap-2.5 mb-8 lg:mb-10">
-          <div className="w-9 h-9 lg:w-11 lg:h-11 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center">
-            <Wind className="text-white w-[18px] h-[18px] lg:w-[22px] lg:h-[22px]" />
+        {/* Wordmark */}
+        <div className="hidden md:flex items-center gap-3 mb-10">
+          <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center">
+            <Wind className="text-white w-5 h-5 lg:w-6 lg:h-6" />
           </div>
-          <span className="text-white text-xl lg:text-2xl font-bold tracking-tight">CoolResponse</span>
+          <span className="text-white text-2xl lg:text-3xl font-bold tracking-tight">CoolResponse</span>
         </div>
 
         {/* Live status pill */}
-        <div className="inline-flex items-center gap-1.5 bg-red-500/10 border border-red-500/20 rounded-full px-3 py-1 mb-4 md:mb-5">
-          <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse flex-shrink-0" />
+        <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/20 rounded-full px-3 py-1 mb-5 md:mb-6">
+          <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse flex-shrink-0" />
           <span className="text-[10px] md:text-xs font-semibold text-red-300 tracking-widest uppercase">
             Live monitoring active
           </span>
         </div>
 
         {/* Hero */}
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-[2.6rem] font-bold text-white leading-tight mb-3 md:mb-5">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.2rem] font-bold text-white leading-tight mb-4 md:mb-6">
           When cold rooms fail,<br />response time is everything.
         </h1>
-        <p className="text-brand-200 text-sm sm:text-[15px] md:text-base lg:text-[17px] leading-relaxed max-w-lg md:max-w-none mb-6 md:mb-8">
+        <p className="text-brand-200 text-base md:text-lg lg:text-xl leading-relaxed mb-7 md:mb-10">
           CoolResponse watches temperatures across all your sites around the clock.
           The moment a reading exceeds your limit, the right people get an SMS —
           with a one-tap option to dispatch a technician or order temporary cooling.
@@ -323,85 +262,80 @@ function MarketingPanel() {
         </p>
 
         {/* Stats strip */}
-        <div className="grid grid-cols-3 gap-3 md:gap-6 mb-6 pb-6 md:mb-10 md:pb-10 border-b border-white/10">
+        <div className="grid grid-cols-3 gap-4 md:gap-8 mb-8 pb-8 md:mb-12 md:pb-12 border-b border-white/10">
           {[
             { value: '30 sec',  label: 'Sensor polling' },
             { value: '< 2 min', label: 'Alert to SMS'   },
             { value: '24 / 7',  label: 'Always-on'      },
           ].map(s => (
             <div key={s.label}>
-              <p className="text-lg sm:text-[1.35rem] md:text-2xl lg:text-3xl font-bold text-white leading-none">{s.value}</p>
-              <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-[13px] text-brand-400 mt-1 md:mt-1.5">{s.label}</p>
+              <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-none">{s.value}</p>
+              <p className="text-[10px] md:text-sm lg:text-base text-brand-400 mt-1.5">{s.label}</p>
             </div>
           ))}
         </div>
 
-        {/* Body — always fully visible; on mobile this section scrolls below the login card */}
-        <div className="space-y-10 sm:space-y-12 md:space-y-14 lg:space-y-16">
+        {/* Body */}
+        <div className="space-y-12 md:space-y-16">
 
           {/* ── Workflow ── */}
           <section id="how-it-works">
-            <p className="text-[11px] md:text-xs uppercase tracking-widest font-semibold text-brand-400 mb-1">
+            <p className="text-xs md:text-sm uppercase tracking-widest font-semibold text-brand-400 mb-2">
               How it works
             </p>
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-7 md:mb-8">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-8 md:mb-10">
               From alarm to action — in minutes.
             </h2>
 
             {/* Step 1 */}
-            <div className="mb-8 md:mb-10">
-              <div className="flex items-center gap-2.5 md:gap-3 mb-2 md:mb-3">
-                <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-brand-600 flex items-center justify-center text-[10px] md:text-xs font-bold text-white flex-shrink-0">
+            <div className="mb-10 md:mb-12">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-brand-600 flex items-center justify-center text-xs md:text-sm font-bold text-white flex-shrink-0">
                   1
                 </div>
-                <p className="text-[13px] md:text-base lg:text-[17px] font-semibold text-white">Continuous monitoring</p>
+                <p className="text-base md:text-xl lg:text-2xl font-semibold text-white">Continuous monitoring</p>
               </div>
-              <p className="text-xs md:text-sm lg:text-[15px] text-brand-300 leading-relaxed mb-4 md:mb-5 pl-[29px] md:pl-[40px]">
+              <p className="text-sm md:text-base lg:text-lg text-brand-300 leading-relaxed mb-5 pl-9 md:pl-11">
                 Sensors report in every 30 seconds. You set the temperature limits per
-                device — CoolResponse watches around the clock, across every room and
-                every site.
+                device — CoolResponse watches around the clock, across every room and every site.
               </p>
               <TempChart />
             </div>
 
-            {/* Step connector */}
-            <div className="flex pl-[9px] md:pl-[12px] mb-8 md:mb-10">
-              <div className="w-[2px] h-6 bg-gradient-to-b from-brand-600/70 to-transparent rounded-full" />
+            <div className="flex pl-2.5 md:pl-3.5 mb-10 md:mb-12">
+              <div className="w-[2px] h-8 bg-gradient-to-b from-brand-600/70 to-transparent rounded-full" />
             </div>
 
             {/* Step 2 */}
-            <div className="mb-8 md:mb-10">
-              <div className="flex items-center gap-2.5 md:gap-3 mb-2 md:mb-3">
-                <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-brand-600 flex items-center justify-center text-[10px] md:text-xs font-bold text-white flex-shrink-0">
+            <div className="mb-10 md:mb-12">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-brand-600 flex items-center justify-center text-xs md:text-sm font-bold text-white flex-shrink-0">
                   2
                 </div>
-                <p className="text-[13px] md:text-base lg:text-[17px] font-semibold text-white">Instant SMS alert</p>
+                <p className="text-base md:text-xl lg:text-2xl font-semibold text-white">Instant SMS alert</p>
               </div>
-              <p className="text-xs md:text-sm lg:text-[15px] text-brand-300 leading-relaxed mb-5 md:mb-6 pl-[29px] md:pl-[40px]">
+              <p className="text-sm md:text-base lg:text-lg text-brand-300 leading-relaxed mb-6 pl-9 md:pl-11">
                 The moment a threshold is crossed, the right people get a plain-text SMS
-                with full context and a clear response menu — no app to download, no
-                account to log in to.
+                with full context and a clear response menu — no app to download, no account to log in to.
               </p>
               <PhoneMockup />
             </div>
 
-            {/* Step connector */}
-            <div className="flex pl-[9px] md:pl-[12px] mb-8 md:mb-10">
-              <div className="w-[2px] h-6 bg-gradient-to-b from-brand-600/70 to-transparent rounded-full" />
+            <div className="flex pl-2.5 md:pl-3.5 mb-10 md:mb-12">
+              <div className="w-[2px] h-8 bg-gradient-to-b from-brand-600/70 to-transparent rounded-full" />
             </div>
 
             {/* Step 3 */}
             <div>
-              <div className="flex items-center gap-2.5 md:gap-3 mb-2 md:mb-3">
-                <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-brand-600 flex items-center justify-center text-[10px] md:text-xs font-bold text-white flex-shrink-0">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-brand-600 flex items-center justify-center text-xs md:text-sm font-bold text-white flex-shrink-0">
                   3
                 </div>
-                <p className="text-[13px] md:text-base lg:text-[17px] font-semibold text-white">Dispatch & resolve</p>
+                <p className="text-base md:text-xl lg:text-2xl font-semibold text-white">Dispatch & resolve</p>
               </div>
-              <p className="text-xs md:text-sm lg:text-[15px] text-brand-300 leading-relaxed mb-4 md:mb-5 pl-[29px] md:pl-[40px]">
-                Replying triggers an automated workflow. A certified technician heads to
-                site, or portable cooling units are dispatched — your choice, instantly
-                actioned and tracked end-to-end.
+              <p className="text-sm md:text-base lg:text-lg text-brand-300 leading-relaxed mb-5 pl-9 md:pl-11">
+                Replying triggers an automated workflow. A certified technician heads to site,
+                or portable cooling units are dispatched — your choice, instantly actioned and tracked end-to-end.
               </p>
               <ResponseCards />
             </div>
@@ -409,17 +343,17 @@ function MarketingPanel() {
 
           {/* ── Built for ── */}
           <section>
-            <h2 className="text-[11px] md:text-xs uppercase tracking-widest font-semibold text-brand-400 mb-3 md:mb-4">
+            <h2 className="text-xs md:text-sm uppercase tracking-widest font-semibold text-brand-400 mb-4">
               Built for
             </h2>
-            <ul className="space-y-2.5 md:space-y-3">
+            <ul className="space-y-3 md:space-y-4">
               {[
                 'Aged care & nursing homes — resident safety',
                 'Convenience & grocery retail — prevent spoilage, protect stock',
                 'Childcare, healthcare & critical facilities',
               ].map(item => (
-                <li key={item} className="flex items-start gap-2.5 text-sm md:text-base lg:text-[17px] text-brand-100">
-                  <CheckCircle size={15} className="text-brand-400 mt-0.5 md:mt-1 flex-shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-base md:text-lg lg:text-xl text-brand-100">
+                  <CheckCircle className="text-brand-400 mt-0.5 flex-shrink-0 w-[16px] h-[16px] md:w-5 md:h-5" />
                   {item}
                 </li>
               ))}
@@ -427,23 +361,23 @@ function MarketingPanel() {
           </section>
 
           {/* ── Trust signals ── */}
-          <section id="security" className="pt-6 border-t border-white/10">
-            <div className="flex flex-wrap gap-x-6 gap-y-3">
+          <section id="security" className="pt-8 border-t border-white/10">
+            <div className="flex flex-wrap gap-x-8 gap-y-3">
               {[
                 { icon: LayoutDashboard, label: 'Designed for multi-site operations' },
                 { icon: Users,           label: 'Role-based access: Admin, Manager, Vendor' },
                 { icon: Shield,          label: 'Secure by design (demo environment)' },
               ].map(t => (
-                <div key={t.label} className="flex items-center gap-1.5 text-xs md:text-sm text-brand-300">
-                  <t.icon size={13} className="text-brand-400 flex-shrink-0" />
+                <div key={t.label} className="flex items-center gap-2 text-sm md:text-base text-brand-300">
+                  <t.icon className="text-brand-400 flex-shrink-0 w-4 h-4" />
                   {t.label}
                 </div>
               ))}
             </div>
           </section>
 
-        </div>{/* end space-y body */}
-      </div>{/* end inner max-w */}
+        </div>
+      </div>
     </div>
   )
 }
@@ -458,7 +392,6 @@ export default function LoginPage() {
   const { login }  = useApp()
   const navigate   = useNavigate()
 
-  // Auth logic — unchanged
   const handleLogin = (e) => {
     e.preventDefault()
     setError('')
@@ -481,7 +414,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gray-50">
 
-      {/* ── Top nav ──────────────────────────────────────────────────────────── */}
+      {/* ── Top nav ── */}
       <nav className="fixed top-0 inset-x-0 z-20 h-14 bg-brand-950/95 backdrop-blur-sm border-b border-white/[0.06]">
         <div className="max-w-screen-xl mx-auto h-full px-5 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -489,14 +422,12 @@ export default function LoginPage() {
             <span className="text-white font-bold text-[15px] tracking-tight">CoolResponse</span>
           </div>
           <div className="flex items-center gap-3 md:gap-5">
-            {/* Desktop nav links */}
             <a href="#how-it-works" className="hidden md:block text-sm text-brand-300 hover:text-white transition-colors">
               How it works
             </a>
             <a href="#security" className="hidden md:block text-sm text-brand-300 hover:text-white transition-colors">
               Security
             </a>
-            {/* Sign-in CTA — mobile shows text link, desktop shows button */}
             <a href="#login" className="md:hidden text-sm font-semibold text-brand-300 hover:text-white transition-colors">
               Sign in ↑
             </a>
@@ -510,47 +441,37 @@ export default function LoginPage() {
         </div>
       </nav>
 
-      {/* ── Layout ───────────────────────────────────────────────────────────────
-           flex-col-reverse: on mobile (single column) the DOM-second child (login)
-           floats to the TOP visually — login is immediately visible without scrolling.
-           md:flex-row: side-by-side from 768 px upward.
-      ────────────────────────────────────────────────────────────────────────── */}
+      {/* ── Two-column layout ── */}
       <div className="flex flex-col-reverse md:flex-row min-h-screen pt-14">
 
-        {/* Left: marketing — visually below login on mobile, left column on md+ */}
+        {/* Left: marketing */}
         <div className="md:flex-1 overflow-hidden bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800
-                        px-5 py-10 sm:px-8 md:px-10 lg:px-16 xl:px-20 lg:py-16">
+                        px-6 py-12 sm:px-8 md:px-12 lg:px-16 xl:px-20 lg:py-16">
           <MarketingPanel />
         </div>
 
-        {/* Right: login — visually first on mobile (col-reverse), right column + sticky on md+ */}
+        {/* Right: login — sticky on desktop */}
         <div
           id="login"
           className="md:w-[380px] lg:w-[460px] xl:w-[520px] bg-gray-50
                      flex items-center justify-center
-                     px-5 py-10 sm:px-8 lg:px-10
+                     px-6 py-12 sm:px-8 lg:px-10
                      md:sticky md:top-14 md:h-[calc(100vh-3.5rem)]"
         >
           <div className="w-full max-w-sm">
 
-            {/* Login card */}
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-7 sm:p-8">
-
-              {/* Card header */}
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center">
                     <Wind size={15} className="text-white" />
                   </div>
-                  <span className="text-[13px] font-bold text-gray-900 tracking-tight">
-                    CoolResponse
-                  </span>
+                  <span className="text-[13px] font-bold text-gray-900 tracking-tight">CoolResponse</span>
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">Sign in</h2>
                 <p className="text-sm text-gray-500 mt-0.5">Use your CoolResponse account</p>
               </div>
 
-              {/* Form */}
               <form onSubmit={handleLogin} className="space-y-4" noValidate>
                 <div>
                   <label htmlFor="cr-email" className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -617,7 +538,6 @@ export default function LoginPage() {
                 </button>
               </form>
 
-              {/* Demo accounts accordion */}
               <div className="mt-5 pt-5 border-t border-gray-100">
                 <button
                   onClick={() => setShowDemoAccounts(v => !v)}
@@ -658,7 +578,6 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Demo disclaimer */}
             <p className="mt-5 text-center text-xs text-gray-400 leading-relaxed px-2">
               Demo prototype &mdash; notifications and dispatch are simulated for proof-of-concept.
             </p>
