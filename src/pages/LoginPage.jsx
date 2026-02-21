@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import {
-  Eye, EyeOff, Wind, Copy, Check,
+  Eye, EyeOff, ChevronDown, Wind, Copy, Check,
   CheckCircle, Users, Shield, LayoutDashboard, Wrench,
 } from 'lucide-react'
 
