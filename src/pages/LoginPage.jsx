@@ -261,6 +261,11 @@ function MarketingPanel() {
           No app. No manual calls. Just action.
         </p>
 
+        {/* Product hero image */}
+        <div className="mb-8 md:mb-12 rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40">
+          <img src="/coolresponse.png" alt="CoolResponse wall-mounted monitoring unit" className="w-full" />
+        </div>
+
         {/* Stats strip */}
         <div className="grid grid-cols-3 gap-4 md:gap-8 mb-8 pb-8 md:mb-12 md:pb-12 border-b border-white/10">
           {[
@@ -299,6 +304,9 @@ function MarketingPanel() {
                 Sensors report in every 30 seconds. You set the temperature limits per
                 device — CoolResponse watches around the clock, across every room and every site.
               </p>
+              <div className="mb-5 rounded-xl overflow-hidden border border-white/10 shadow-xl shadow-black/30">
+                <img src="/explodedview.png" alt="CoolResponse monitoring unit — component breakdown" className="w-full" />
+              </div>
               <TempChart />
             </div>
 
@@ -338,6 +346,9 @@ function MarketingPanel() {
                 or portable cooling units are dispatched — your choice, instantly actioned and tracked end-to-end.
               </p>
               <ResponseCards />
+              <div className="mt-5 rounded-xl overflow-hidden border border-white/10 shadow-xl shadow-black/30">
+                <img src="/nursinghome.png" alt="Technician installing temporary cooling at nursing home" className="w-full" />
+              </div>
             </div>
           </section>
 
