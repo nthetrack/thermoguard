@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import {
-  Eye, EyeOff, ChevronDown, Wind, Copy, Check,
+  Eye, EyeOff, Wind, Copy, Check,
   CheckCircle, Users, Shield, LayoutDashboard, Wrench,
 } from 'lucide-react'
 
@@ -64,8 +64,7 @@ function TempChart() {
         </div>
         <svg
           viewBox="0 0 280 78"
-          className="w-full"
-          style={{ height: '78px' }}
+          className="w-full h-[65px] sm:h-[78px]"
           aria-hidden="true"
         >
           <defs>
@@ -228,7 +227,7 @@ function PhoneMockup() {
 // ── Dispatch outcome cards ─────────────────────────────────────────────────────
 function ResponseCards() {
   return (
-    <div className="grid grid-cols-2 gap-2.5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
       {/* Technician */}
       <div className="bg-white/[0.08] border border-white/[0.12] rounded-xl p-3 hover:bg-white/[0.12] transition-colors">
         <div className="w-7 h-7 rounded-lg bg-brand-600/50 flex items-center justify-center mb-2.5">
@@ -276,8 +275,6 @@ function ResponseCards() {
 
 // ── Marketing panel (left column) ─────────────────────────────────────────────
 function MarketingPanel() {
-  const [expanded, setExpanded] = useState(false)
-
   return (
     <div className="relative">
       {/* Decorative blobs */}
@@ -288,8 +285,8 @@ function MarketingPanel() {
 
       <div className="relative">
 
-        {/* Wordmark */}
-        <div className="flex items-center gap-2.5 mb-10">
+        {/* Wordmark — hidden on mobile (nav carries it), shown once side-by-side layout kicks in */}
+        <div className="hidden md:flex items-center gap-2.5 mb-8 lg:mb-10">
           <div className="w-9 h-9 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center">
             <Wind size={18} className="text-white" />
           </div>
@@ -297,7 +294,7 @@ function MarketingPanel() {
         </div>
 
         {/* Live status pill */}
-        <div className="inline-flex items-center gap-1.5 bg-red-500/10 border border-red-500/20 rounded-full px-3 py-1 mb-5">
+        <div className="inline-flex items-center gap-1.5 bg-red-500/10 border border-red-500/20 rounded-full px-3 py-1 mb-4 md:mb-5">
           <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse flex-shrink-0" />
           <span className="text-[10px] font-semibold text-red-300 tracking-widest uppercase">
             Live monitoring active
@@ -305,10 +302,10 @@ function MarketingPanel() {
         </div>
 
         {/* Hero */}
-        <h1 className="text-3xl xl:text-[2.4rem] font-bold text-white leading-tight mb-3">
+        <h1 className="text-2xl sm:text-3xl xl:text-[2.4rem] font-bold text-white leading-tight mb-3">
           When cold rooms fail,<br />response time is everything.
         </h1>
-        <p className="text-brand-200 text-[15px] leading-relaxed max-w-lg mb-8">
+        <p className="text-brand-200 text-sm sm:text-[15px] leading-relaxed max-w-lg mb-6 md:mb-8">
           CoolResponse watches temperatures across all your sites around the clock.
           The moment a reading exceeds your limit, the right people get an SMS —
           with a one-tap option to dispatch a technician or order temporary cooling.
@@ -316,35 +313,21 @@ function MarketingPanel() {
         </p>
 
         {/* Stats strip */}
-        <div className="grid grid-cols-3 gap-4 mb-8 pb-8 border-b border-white/10">
+        <div className="grid grid-cols-3 gap-3 md:gap-4 mb-6 pb-6 md:mb-8 md:pb-8 border-b border-white/10">
           {[
             { value: '30 sec',  label: 'Sensor polling' },
             { value: '< 2 min', label: 'Alert to SMS'   },
             { value: '24 / 7',  label: 'Always-on'      },
           ].map(s => (
             <div key={s.label}>
-              <p className="text-[1.35rem] font-bold text-white leading-none">{s.value}</p>
-              <p className="text-[10px] text-brand-400 mt-1">{s.label}</p>
+              <p className="text-lg sm:text-[1.35rem] font-bold text-white leading-none">{s.value}</p>
+              <p className="text-[9px] sm:text-[10px] text-brand-400 mt-1">{s.label}</p>
             </div>
           ))}
         </div>
 
-        {/* Mobile expand toggle */}
-        <div className="lg:hidden mb-6">
-          <button
-            onClick={() => setExpanded(v => !v)}
-            className="inline-flex items-center gap-1.5 text-sm text-brand-300 hover:text-white transition-colors"
-          >
-            <ChevronDown
-              size={15}
-              className={`transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
-            />
-            {expanded ? 'Show less' : 'See how it works'}
-          </button>
-        </div>
-
-        {/* Collapsible body — always shown on lg+ */}
-        <div className={`space-y-12 ${expanded ? 'block' : 'hidden'} lg:block`}>
+        {/* Body — always fully visible; on mobile this section scrolls below the login card */}
+        <div className="space-y-10 sm:space-y-12">
 
           {/* ── Workflow ── */}
           <section id="how-it-works">
@@ -449,8 +432,8 @@ function MarketingPanel() {
             </div>
           </section>
 
-        </div>
-      </div>
+        </div>{/* end space-y body */}
+      </div>{/* end inner relative */}
     </div>
   )
 }
@@ -495,16 +478,21 @@ export default function LoginPage() {
             <Wind size={18} className="text-brand-400" />
             <span className="text-white font-bold text-[15px] tracking-tight">CoolResponse</span>
           </div>
-          <div className="hidden md:flex items-center gap-5">
-            <a href="#how-it-works" className="text-sm text-brand-300 hover:text-white transition-colors">
+          <div className="flex items-center gap-3 md:gap-5">
+            {/* Desktop nav links */}
+            <a href="#how-it-works" className="hidden md:block text-sm text-brand-300 hover:text-white transition-colors">
               How it works
             </a>
-            <a href="#security" className="text-sm text-brand-300 hover:text-white transition-colors">
+            <a href="#security" className="hidden md:block text-sm text-brand-300 hover:text-white transition-colors">
               Security
+            </a>
+            {/* Sign-in CTA — mobile shows text link, desktop shows button */}
+            <a href="#login" className="md:hidden text-sm font-semibold text-brand-300 hover:text-white transition-colors">
+              Sign in ↑
             </a>
             <a
               href="#login"
-              className="text-[13px] font-semibold bg-brand-600 hover:bg-brand-500 text-white px-4 py-1.5 rounded-lg transition-colors"
+              className="hidden md:block text-[13px] font-semibold bg-brand-600 hover:bg-brand-500 text-white px-4 py-1.5 rounded-lg transition-colors"
             >
               Sign in
             </a>
@@ -512,20 +500,26 @@ export default function LoginPage() {
         </div>
       </nav>
 
-      {/* ── Two-column layout ─────────────────────────────────────────────────── */}
-      <div className="flex flex-col lg:flex-row min-h-screen pt-14">
+      {/* ── Layout ───────────────────────────────────────────────────────────────
+           flex-col-reverse: on mobile (single column) the DOM-second child (login)
+           floats to the TOP visually — login is immediately visible without scrolling.
+           md:flex-row: side-by-side from 768 px upward.
+      ────────────────────────────────────────────────────────────────────────── */}
+      <div className="flex flex-col-reverse md:flex-row min-h-screen pt-14">
 
-        {/* Left: marketing */}
-        <div className="lg:flex-1 bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800 px-6 py-10 md:px-10 lg:px-14 lg:py-16">
+        {/* Left: marketing — visually below login on mobile, left column on md+ */}
+        <div className="md:flex-1 overflow-hidden bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800
+                        px-5 py-10 sm:px-8 md:px-10 lg:px-14 lg:py-16">
           <MarketingPanel />
         </div>
 
-        {/* Right: login — sticky on desktop */}
+        {/* Right: login — visually first on mobile (col-reverse), right column + sticky on md+ */}
         <div
           id="login"
-          className="lg:w-[460px] xl:w-[500px] bg-gray-50 flex items-center justify-center
-                     px-5 py-12 md:px-8
-                     lg:sticky lg:top-14 lg:h-[calc(100vh-3.5rem)]"
+          className="md:w-[370px] lg:w-[460px] xl:w-[500px] bg-gray-50
+                     flex items-center justify-center
+                     px-5 py-10 sm:px-8
+                     md:sticky md:top-14 md:h-[calc(100vh-3.5rem)]"
         >
           <div className="w-full max-w-sm">
 
